@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - CYKEL</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f9f9f9;
+        }
+        
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #7F9781;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+        
+        h2 {
+            color: #5E6F59;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            border-bottom: 2px solid #7F9781;
+            padding-bottom: 5px;
+        }
+        
+        h3 {
+            color: #333;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        p, li {
+            margin-bottom: 10px;
+        }
+        
+        ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .last-updated {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+        
+        .contact {
+            background: #f0f4f1;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+        
+        a {
+            color: #7F9781;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Privacy Policy</h1>
+        <p class="last-updated">Last updated: April 13, 2026</p>
+        <p style="background: #e8f5e9; padding: 10px; border-radius: 6px; border-left: 4px solid #7F9781; margin-bottom: 20px;">
+            <strong>🇪🇺 GDPR Compliant</strong> — This policy complies with the EU General Data Protection Regulation (GDPR) and Danish data protection law (Databeskyttelsesloven).
+        </p>
+        
+        <p><strong>Data Controller:</strong> CYKEL ApS acts as the Data Controller for all personal data collected through the CYKEL app.</p>
+        
+        <p>Welcome to CYKEL ("we," "our," or "us"). We are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our mobile application.</p>
+        
+        <h2>1. Information We Collect</h2>
+        
+        <p><strong>Legal Basis Summary:</strong> Below is a summary of the data we collect and the legal basis under GDPR for each type:</p>
+        
+        <table style="width: 100%; border-collapse: collapse; margin: 20px 0; border: 1px solid #ddd;">
+            <tr style="background: #f0f4f1;">
+                <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Data Type</th>
+                <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Legal Basis</th>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid #ddd;">Account Information</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">Contract Performance</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid #ddd;">Location Data</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">Consent + Contract Performance</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid #ddd;">Ride & Activity Data</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">Contract Performance</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid #ddd;">Analytics (Optional)</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">Consent</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid #ddd;">Marketing Communications</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">Consent</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid #ddd;">Security & Fraud Prevention</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">Legitimate Interest</td>
+            </tr>
+        </table>
+        
+        <h3>1.1 Personal Information</h3>
+        <p><strong>Legal Basis: Contract Performance</strong></p>
+        <p>When you create an account, we collect:</p>
+        <ul>
+            <li><strong>Account Information:</strong> Email address, name, profile photo</li>
+            <li><strong>Authentication:</strong> Email/password or third-party OAuth tokens (Google, Apple)</li>
+            <li><strong>Profile Data:</strong> Bike preferences, cycling experience level, goals</li>
+        </ul>
+        
+        <h3>1.2 Location Data</h3>
+        <p><strong>Legal Basis: Consent + Contract Performance</strong></p>
+        <p>CYKEL requires location access for core functionality:</p>
+        <ul>
+            <li><strong>GPS Tracking:</strong> Real-time location during ride recording</li>
+            <li><strong>Background Location (Optional):</strong> Used during turn-by-turn navigation. You can disable background location and still use most features.</li>
+            <li><strong>Route Data:</strong> Latitude/longitude points, timestamps, elevation</li>
+            <li><strong>Nearby Places:</strong> Bike lanes, parking, repair stations near you</li>
+            <li><strong>Storage:</strong> Location data is stored in Firebase Firestore</li>
+        </ul>
+        <p><strong>Background Location Control:</strong> Background location tracking is <em>only active during navigation</em>. You can:</p>
+        <ul>
+            <li>Disable background location in device settings (navigation still works with "When In Use" permission)</li>
+            <li>End navigation to stop background tracking immediately</li>
+            <li>Revoke location permission anytime (note: this will limit core features like ride tracking)</li>
+        </ul>
+        <p><em>You control location access through device settings. Without location permission, ride tracking and discovery features will not work.</em></p>
+        
+        <h3>1.3 Usage Data</h3>
+        <p><strong>Legal Basis: Consent (Optional - you can opt-out)</strong></p>
+        <ul>
+            <li><strong>Analytics (Opt-In Only):</strong> Firebase Analytics tracks app usage, feature engagement, crash reports. <em>Analytics is OFF by default and requires your explicit consent.</em></li>
+            <li><strong>Device Info:</strong> Device model, OS version, app version</li>
+            <li><strong>Performance:</strong> App launch time, screen load times, network latency</li>
+        </ul>
+        
+        <h3>1.4 User-Generated Content</h3>
+        <p><strong>Legal Basis: Contract Performance</strong></p>
+        <ul>
+            <li><strong>Marketplace Listings:</strong> Photos, descriptions, pricing for items you sell</li>
+            <li><strong>Messages:</strong> Chat conversations with other users. Messages are encrypted in transit via HTTPS/TLS and protected by Firebase Security Rules to prevent unauthorized access. Only the sender and recipient can access message content.</li>
+            <li><strong>Reviews:</strong> Ratings and comments on locations</li>
+            <li><strong>Theft Alerts:</strong> Bike details, serial numbers (verified on best-effort basis against community-reported stolen bikes)</li>
+        </ul>
+        
+        <h3>1.5 Photos and Media</h3>
+        <p>If you upload photos (profile picture, marketplace listings), we store them in Firebase Cloud Storage. You can delete your photos anytime.</p>
+        
+        <h2>2. How We Use Your Information</h2>
+        
+        <p>We use collected information for:</p>
+        <ul>
+            <li><strong>Core Functionality:</strong> Ride tracking, route planning, navigation</li>
+            <li><strong>Personalization:</strong> Customized ride recommendations, nearby places</li>
+            <li><strong>Marketplace:</strong> Facilitate buying/selling between users</li>
+            <li><strong>Communication:</strong> Push notifications, email updates (optional)</li>
+            <li><strong>Safety:</strong> Fraud detection, abuse prevention, content moderation</li>
+            <li><strong>Improvement:</strong> Analytics to improve app performance and features</li>
+            <li><strong>Legal:</strong> Comply with laws, enforce terms, protect rights</li>
+        </ul>
+        
+        <h2>3. Data Sharing</h2>
+        
+        <h3>3.1 Third-Party Services</h3>
+        <p>We use the following third-party services that may access your data:</p>
+        <ul>
+            <li><strong>Firebase (Google):</strong> Authentication, database, storage, analytics, crash reporting</li>
+            <li><strong>Google Maps:</strong> Map display, geocoding, directions (IP address shared)</li>
+            <li><strong>Apple/Google Payment:</strong> In-app purchase processing (subscription data only)</li>
+        </ul>
+        
+        <h3>3.2 What We Don't Share</h3>
+        <ul>
+            <li>We <strong>never sell</strong> your personal data to third parties</li>
+            <li>We <strong>do not share</strong> your location data with advertisers</li>
+            <li>We <strong>do not use</strong> your data for advertising targeting</li>
+            <li>Serial number checks against stolen bike databases are performed on a <strong>best-effort basis</strong> and do not guarantee prevention of theft or sale of stolen goods</li>
+        </ul>
+        
+        <h3>3.3 Public Information</h3>
+        <p>The following information is visible to other CYKEL users:</p>
+        <ul>
+            <li>Profile name and photo</li>
+            <li>Marketplace listings (photos, descriptions, location city)</li>
+            <li>Reviews you post on locations</li>
+        </ul>
+        <p><em>Your exact home address, GPS tracks, and private messages are never publicly visible.</em></p>
+        
+        <h2>4. Data Security</h2>
+        
+        <p>We implement industry-standard security measures:</p>
+        <ul>
+            <li><strong>Encryption:</strong> All data transmitted via HTTPS/TLS 1.3</li>
+            <li><strong>Firebase Security Rules:</strong> Access control to prevent unauthorized data access</li>
+            <li><strong>Authentication:</strong> Secure OAuth 2.0 for Google/Apple sign-in</li>
+            <li><strong>Biometric Lock:</strong> Optional Face ID/Touch ID/Fingerprint protection (data stored locally only)</li>
+            <li><strong>Payment Security:</strong> Handled by Apple/Google - we never see your credit card</li>
+            <li><strong>Firebase App Check:</strong> Prevents API abuse from unauthorized clients</li>
+        </ul>
+        
+        <h3>4.1 Data Breach Notification</h3>
+        <p>In the unlikely event of a data breach affecting your personal information, we will:</p>
+        <ul>
+            <li>Notify affected users via email within <strong>72 hours</strong> of discovering the breach</li>
+            <li>Report the breach to Datatilsynet (Danish Data Protection Agency) as required by GDPR</li>
+            <li>Provide details about what data was affected and steps we're taking</li>
+            <li>Offer guidance on protective measures you can take</li>
+        </ul>
+        
+        <h2>5. Your Rights (GDPR Compliance)</h2>
+        
+        <p><strong>Legal Basis for Processing:</strong> Under GDPR, we process your data based on:</p>
+        <ul>
+            <li><strong>Consent:</strong> Location tracking, analytics, marketing communications (requested on first launch)</li>
+            <li><strong>Contract Performance:</strong> Profile, ride history, marketplace transactions</li>
+            <li><strong>Legitimate Interest:</strong> Safety, fraud prevention, app improvement</li>
+            <li><strong>Legal Obligation:</strong> Tax compliance, law enforcement requests</li>
+        </ul>
+        
+        <h3>5.1 Consent Management</h3>
+        <p>When you first open CYKEL, you'll be asked to consent to:</p>
+        <ul>
+            <li><strong>Location Services (Required):</strong> Essential for ride tracking and nearby features. You can revoke via device settings.</li>
+            <li><strong>Analytics (Optional, OFF by Default):</strong> Helps us improve app performance and fix bugs. <strong>Not enabled unless you explicitly opt-in.</strong> Toggle anytime in Profile → Privacy & Data → Analytics.</li>
+            <li><strong>Marketing (Optional, OFF by Default):</strong> Receive promotional emails and in-app announcements. Toggle in Profile → Privacy & Data → Marketing.</li>
+        </ul>
+        <p><em>You can update these preferences anytime in your profile settings. Withdrawing consent does not affect data processed before withdrawal.</em></p>
+        
+        <h3>5.2 Your GDPR Rights</h3>
+        <p>If you are in the EU/EEA, you have the following rights:</p>
+        <ul>
+            <li><strong>Access:</strong> Request a copy of your data (Profile → Privacy & Data → Download My Data)</li>
+            <li><strong>Rectification:</strong> Correct inaccurate data in your profile settings</li>
+            <li><strong>Erasure ("Right to be Forgotten"):</strong> Delete your account and all data (Profile → Delete Account)</li>
+            <li><strong>Portability:</strong> Export your data as JSON format for transfer to other services</li>
+            <li><strong>Objection:</strong> Opt-out of analytics, marketing, or aggregated data usage</li>
+            <li><strong>Restriction:</strong> Pause data processing temporarily (contact privacy@cykel.app)</li>
+            <li><strong>Lodge Complaint:</strong> Contact the Danish Data Protection Agency (Datatilsynet) if you believe we violated GDPR</li>
+        </ul>
+        
+        <h3>5.3 Data Erasure Process</h3>
+        <p><strong>When you delete your account, we permanently remove:</strong></p>
+        <ul>
+            <li>Profile information and authentication data (within 30 days)</li>
+            <li>All ride history and GPS tracks (within 30 days)</li>
+            <li>Marketplace listings and photos (immediately)</li>
+            <li>Chat messages sent/received (within 30 days)</li>
+            <li>All consent records and preferences</li>
+        </ul>
+        <p><em>Deletion is permanent and cannot be undone. Some data may be retained for legal compliance (fraud prevention, tax records) for up to 90 days. Anonymized analytics data (no personal identifiers) may be retained indefinitely.</em></p>
+        
+        <h3>5.4 Danish Data Protection Authority</h3>
+        <p>You have the right to lodge a complaint with the Danish Data Protection Agency:</p>
+        <ul>
+            <li><strong>Website:</strong> <a href="https://www.datatilsynet.dk">www.datatilsynet.dk</a></li>
+            <li><strong>Email:</strong> dt@datatilsynet.dk</li>
+            <li><strong>Phone:</strong> +45 33 19 32 00</li>
+        </ul>
+        
+        <h2>6. Data Retention</h2>
+        
+        <p>We retain your data only as long as necessary for the purposes described in this policy:</p>
+        <ul>
+            <li><strong>Active Accounts:</strong> Data retained as long as your account is active. <em>Justification: Required to provide core service (ride tracking, navigation, marketplace) under Contract Performance legal basis.</em></li>
+            <li><strong>Inactive Accounts:</strong> After 2 years of inactivity, we may delete your account with 30 days email notice</li>
+            <li><strong>Deleted Accounts:</strong> Data removed within 30 days (legal backups may persist up to 90 days for disaster recovery)</li>
+            <li><strong>Crash Logs:</strong> Retained for 90 days for debugging (Legitimate Interest)</li>
+            <li><strong>Analytics:</strong> Aggregated, anonymized data (no personal identifiers) may be retained indefinitely for statistical analysis</li>
+            <li><strong>Legal Compliance:</strong> Some data (fraud logs, tax records) retained per Danish law requirements (up to 5 years for accounting records)</li>
+        </ul>
+        
+        <h2>7. Children's Privacy</h2>
+        
+        <p><strong>Age Requirements:</strong></p>
+        <ul>
+            <li><strong>EU/EEA users:</strong> Minimum age 16 (per GDPR Article 8)</li>
+            <li><strong>Non-EU users:</strong> Minimum age 13 (COPPA compliance)</li>
+        </ul>
+        <p>We do not knowingly collect data from children below these age thresholds. Age is verified by user declaration during signup. If you believe a child has created an account, please contact us immediately at privacy@cykel.app for immediate account deletion and parent notification.</p>
+        
+        <h2>8. International Data Transfers</h2>
+        
+        <p>CYKEL uses Firebase (Google Cloud) which may store data in servers located in:</p>
+        <ul>
+            <li>European Union (primary)</li>
+            <li>United States (Firebase services)</li>
+        </ul>
+        <p>Data transfers outside the EU are protected by:</p>
+        <ul>
+            <li>Google's EU-US Data Privacy Framework certification</li>
+            <li>Standard Contractual Clauses (SCCs)</li>
+            <li>Adequate security safeguards</li>
+        </ul>
+        
+        <h2>9. In-App Purchases</h2>
+        
+        <p>CYKEL offers optional premium subscriptions through Apple App Store and Google Play:</p>
+        <ul>
+            <li><strong>Payment Processing:</strong> Handled entirely by Apple/Google - we never access your payment information</li>
+            <li><strong>Receipt Validation:</strong> We verify purchase receipts server-side with Apple/Google</li>
+            <li><strong>Subscription Status:</strong> Stored in Firestore (product ID, expiry date, no payment details)</li>
+            <li><strong>Cancellation:</strong> Manage subscriptions in your App Store/Play Store account settings</li>
+            <li><strong>Refunds:</strong> Contact Apple/Google per their policies</li>
+        </ul>
+        
+        <h2>10. Cookies and Tracking</h2>
+        
+        <p>CYKEL mobile app does not use cookies. Firebase Analytics uses device identifiers for:</p>
+        <ul>
+            <li>Anonymous usage statistics</li>
+            <li>Crash reporting</li>
+            <li>Performance monitoring</li>
+        </ul>
+        <p>You can opt-out in Settings → Privacy → Share Analytics.</p>
+        
+        <h2>11. Changes to This Policy</h2>
+        
+        <p>We may update this Privacy Policy from time to time. Changes will be:</p>
+        <ul>
+            <li>Posted in the app (Settings → Privacy → Privacy Policy)</li>
+            <li>Notified via email (for material changes)</li>
+            <li>Effective 30 days after posting</li>
+        </ul>
+        <p>Continued use after changes means you accept the updated policy.</p>
+        
+        <h2>12. Your Consent</h2>
+        
+        <p><strong>First Launch Consent Dialog:</strong> When you first open CYKEL, you'll see a consent dialog requesting permission for:</p>
+        <ul>
+            <li><strong>Location Services (Required):</strong> Essential for ride tracking, navigation, and nearby features. Cannot be disabled without limiting core functionality.</li>
+            <li><strong>Analytics (Optional, OFF by Default):</strong> Helps us improve app performance and fix bugs. <strong>You must actively enable this</strong> - it is NOT pre-selected. You can opt-out anytime.</li>
+            <li><strong>Marketing (Optional, OFF by Default):</strong> Receive promotional emails and in-app announcements. Not selected by default.</li>
+        </ul>
+        
+        <p><strong>By creating an account and using CYKEL, you consent to:</strong></p>
+        <ul>
+            <li>Collection of data described in this policy</li>
+            <li>Processing for purposes stated above</li>
+            <li>Use of third-party services (Firebase, Google Maps)</li>
+            <li>Storage of data in EU and US data centers (with GDPR safeguards via SCCs)</li>
+        </ul>
+        
+        <p><strong>Granular Consent Options:</strong></p>
+        <ul>
+            <li><strong>"Essential Only":</strong> Registers only location consent, disables analytics and marketing</li>
+            <li><strong>"Accept Selected":</strong> Registers your explicitly selected preferences (location + any analytics/marketing you manually enabled)</li>
+        </ul>
+        
+        <p><strong>Withdrawing Consent:</strong></p>
+        <ul>
+            <li>Update preferences anytime in Profile → Privacy & Data</li>
+            <li>Revoke location access via device settings (note: this will limit app functionality)</li>
+            <li>Delete your account entirely to withdraw all consent and erase data</li>
+        </ul>
+        
+        <p><em>Consent withdrawal does not affect the lawfulness of processing based on consent before its withdrawal. Some essential processing may continue under other legal bases (contract performance, legal obligation).</em></p>
+        
+        <h2>13. Contact Us</h2>
+        
+        <div class="contact">
+            <p><strong>Data Protection Questions or Requests:</strong></p>
+            <p>Email: <a href="mailto:privacy@cykel.app">privacy@cykel.app</a></p>
+            <p>Support: <a href="mailto:support@cykel.app">support@cykel.app</a></p>
+            <p>Website: <a href="https://cykel.app">https://cykel.app</a></p>
+            
+            <p style="margin-top: 15px;"><strong>Mailing Address:</strong></p>
+            <p>
+                CYKEL ApS<br>
+                123 Bicycle Street<br>
+                Copenhagen, 2100<br>
+                Denmark
+            </p>
+        </div>
+        
+        <h2>14. EU Representative</h2>
+        
+        <p>If you are in the European Union and have questions about data protection, you may contact our EU representative or file a complaint with your local Data Protection Authority.</p>
+        
+        <h2>15. Governing Law</h2>
+        
+        <p>This Privacy Policy is governed by the laws of Denmark and the European Union (GDPR). Disputes will be resolved in Danish courts.</p>
+        
+        <hr style="margin: 40px 0; border: none; border-top: 1px solid #ddd;">
+        
+        <p style="font-size: 0.9em; color: #666;">
+            <strong>Summary:</strong> We collect location data to track your rides, use Firebase for data storage, and never sell your information. You can export or delete all your data anytime. We comply with GDPR and prioritize your privacy.
+        </p>
+    </div>
+</body>
+</html>

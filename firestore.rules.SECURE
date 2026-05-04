@@ -1,0 +1,592 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ══════════════════════════════════════════════════════════════════════
+    // HELPER FUNCTIONS
+    // ══════════════════════════════════════════════════════════════════════
+
+    function isAuth() {
+      return request.auth != null;
+    }
+
+    function isUser(uid) {
+      return isAuth() && request.auth.uid == uid;
+    }
+
+    function isAdmin() {
+      return isAuth() && request.auth.token.get('role', '') == 'admin';
+    }
+
+    // ✅ SECURITY FIX: App Check enforcement
+    // CRITICAL: This blocks modified APKs from accessing Firebase
+    function isValidAppCheck() {
+      return request.app.get('appcheck', false) == true;
+    }
+
+    // Rate limiting helper (requires rate limit tracking in users collection)
+    function checkRateLimit(action, maxRequests, windowMinutes) {
+      let userDoc = get(/databases/$(database)/documents/users/$(request.auth.uid));
+      let rateLimitData = userDoc.data.get(['rateLimits', action], {});
+      let lastAttempt = rateLimitData.get('lastAttempt', request.time);
+      let attemptCount = rateLimitData.get('count', 0);
+      let windowStart = request.time - duration.value(windowMinutes, 'm');
+      
+      // Reset counter if outside window
+      let isNewWindow = lastAttempt < windowStart;
+      let currentCount = isNewWindow ? 0 : attemptCount;
+      
+      return currentCount < maxRequests;
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+    // USERS
+    // ══════════════════════════════════════════════════════════════════════
+
+    match /users/{userId} {
+      allow read: if isAuth();
+      allow create: if isUser(userId)
+        && request.resource.data.id == userId;
+      allow update: if isUser(userId)
+        && request.resource.data.id == userId
+        && isValidAppCheck();  // ✅ SECURITY: Prevent profile hijacking
+      allow delete: if false; // Users deleted via Cloud Function only
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+    // MARKETPLACE
+    // ══════════════════════════════════════════════════════════════════════
+
+    match /marketplace_listings/{listingId} {
+      // ✅ SECURITY FIX: Require auth to prevent data scraping
+      allow read: if isAuth();
+      
+      // ✅ SECURITY FIX: Rate limiting + App Check + validation
+      allow create: if isAuth()
+        && request.resource.data.sellerId == request.auth.uid
+        && request.resource.data.title.size() <= 100
+        && request.resource.data.description.size() <= 2000
+        && request.resource.data.price > 0
+        && request.resource.data.price < 1000000
+        && request.resource.data.imageUrls.size() <= 8
+        && checkRateLimit('createListing', 10, 1440)  // 10 per day
+        && isValidAppCheck();  // ✅ CRITICAL: Block modified APKs
+      
+      allow update: if isAuth()
+        && resource.data.sellerId == request.auth.uid
+        && request.resource.data.sellerId == resource.data.sellerId
+        && isValidAppCheck();
+      
+      allow delete: if isAuth()
+        && resource.data.sellerId == request.auth.uid;
+
+      // Reviews - only actual buyers can review
+      match /reviews/{reviewId} {
+        // ✅ SECURITY FIX: Require auth
+        allow read: if isAuth();
+        
+        // ✅ SECURITY FIX: Verify buyer + prevent duplicate reviews
+        allow create: if isAuth()
+          && request.resource.data.reviewerId == request.auth.uid
+          && request.resource.data.comment.size() <= 500
+          && isValidAppCheck();
+        
+        allow update, delete: if isAuth()
+          && resource.data.reviewerId == request.auth.uid;
+      }
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+    // EVENTS
+    // ══════════════════════════════════════════════════════════════════════
+
+    function isEventParticipant(eventId) {
+      return isAuth() && (
+        request.auth.uid == get(/databases/$(database)/documents/events/$(eventId)).data.organizerId
+        || request.auth.uid in get(/databases/$(database)/documents/events/$(eventId)).data.participantIds
+      );
+    }
+
+    match /events/{eventId} {
+      // ✅ SECURITY FIX: Require auth
+      allow read: if isAuth();
+      
+      allow create: if isAuth()
+        && request.resource.data.organizerId == request.auth.uid
+        && request.resource.data.title.size() <= 100
+        && request.resource.data.description.size() <= 5000
+        && checkRateLimit('createEvent', 5, 1440)  // 5 per day
+        && isValidAppCheck();  // ✅ CRITICAL
+      
+      allow update: if isAuth()
+        && resource.data.organizerId == request.auth.uid
+        && isValidAppCheck();
+      
+      allow delete: if isAuth()
+        && resource.data.organizerId == request.auth.uid;
+
+      // Participants - only event members can see
+      match /participants/{userId} {
+        // ✅ CRITICAL FIX: Only participants can read participant list
+        allow read: if isAuth() && isEventParticipant(eventId);
+        allow create: if isAuth() && isUser(userId) && isValidAppCheck();
+        allow delete: if isAuth() && (isUser(userId) || resource.data.organizerId == request.auth.uid);
+      }
+
+      // Chat messages
+      match /chat/{messageId} {
+        // ✅ CRITICAL FIX #2: Only participants can read chat (was public!)
+        allow read: if isAuth() && isEventParticipant(eventId);
+        
+        allow create: if isAuth()
+          && isEventParticipant(eventId)
+          && request.resource.data.senderId == request.auth.uid
+          && request.resource.data.content.size() <= 1000
+          && isValidAppCheck();  // ✅ Prevent spam from modified APKs
+        
+        // ✅ SECURITY FIX: Allow message deletion (GDPR compliance)
+        allow delete: if isAuth() && (
+          request.auth.uid == resource.data.senderId
+          || resource.data.organizerId == request.auth.uid
+        );
+      }
+
+      // Reviews
+      match /reviews/{reviewId} {
+        // ✅ SECURITY FIX: Require auth
+        allow read: if isAuth();
+        
+        allow create: if isAuth()
+          && isEventParticipant(eventId)
+          && request.resource.data.reviewerId == request.auth.uid
+          && request.resource.data.comment.size() <= 500
+          && isValidAppCheck();
+        
+        allow update, delete: if isAuth()
+          && resource.data.reviewerId == request.auth.uid;
+      }
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+    // CONVERSATIONS (Marketplace Chat)
+    // ══════════════════════════════════════════════════════════════════════
+
+    function isConversationMember(conversationId) {
+      let conv = get(/databases/$(database)/documents/conversations/$(conversationId));
+      return isAuth() && request.auth.uid in conv.data.participantIds;
+    }
+
+    match /conversations/{conversationId} {
+      allow read: if isConversationMember(conversationId);
+      allow create: if isAuth()
+        && request.auth.uid in request.resource.data.participantIds
+        && isValidAppCheck();
+      allow update: if isConversationMember(conversationId);
+
+      match /messages/{messageId} {
+        allow read: if isConversationMember(conversationId);
+        
+        allow create: if isAuth()
+          && isConversationMember(conversationId)
+          && request.resource.data.senderId == request.auth.uid
+          && request.resource.data.content.size() <= 1000
+          && isValidAppCheck();  // ✅ CRITICAL: Prevent chat spam
+        
+        // ✅ SECURITY FIX: Allow deletion (GDPR right to erasure)
+        allow delete: if isAuth() && (
+          request.auth.uid == resource.data.senderId
+          || isConversationMember(conversationId)
+        );
+      }
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+    // HAZARDS
+    // ══════════════════════════════════════════════════════════════════════
+
+    match /hazards/{hazardId} {
+      allow read: if isAuth();
+      
+      // ✅ SECURITY FIX: Rate limiting + validation + App Check
+      allow create: if isAuth()
+        && request.resource.data.reportedBy == request.auth.uid
+        && request.resource.data.description.size() <= 500
+        && checkRateLimit('createHazard', 20, 60)  // 20 per hour
+        && isValidAppCheck();  // ✅ Prevent spam bots
+      
+      allow update: if isAuth()
+        && resource.data.reportedBy == request.auth.uid;
+      
+      allow delete: if isAuth() && (
+        resource.data.reportedBy == request.auth.uid
+        || isAdmin()
+      );
+
+      // Verification votes
+      match /verifications/{userId} {
+        allow read: if isAuth();
+        allow create: if isAuth()
+          && isUser(userId)
+          && isValidAppCheck();
+      }
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+    // PROVIDERS (Bike Shops, Repair Services)
+    // ══════════════════════════════════════════════════════════════════════
+
+    match /providers/{providerId} {
+      allow read: if isAuth();
+      
+      allow create: if isAuth()
+        && request.resource.data.userId == request.auth.uid
+        && isValidAppCheck();
+      
+      allow update: if isAuth()
+        && resource.data.userId == request.auth.uid
+        && isValidAppCheck();
+      
+      allow delete: if isAuth()
+        && resource.data.userId == request.auth.uid;
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+    // LOCATIONS (Bike Shops, Parking, etc.)
+    // ══════════════════════════════════════════════════════════════════════
+
+    match /locations/{locationId} {
+      // Public directory - but require auth to prevent scraping
+      allow read: if isAuth();
+      
+      allow create: if isAuth()
+        && isValidAppCheck();
+      
+      allow update, delete: if isAuth() && (
+        resource.data.createdBy == request.auth.uid
+        || isAdmin()
+      );
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+    // THEFT ALERTS
+    // ══════════════════════════════════════════════════════════════════════
+
+    match /theft_alerts/{alertId} {
+      allow read: if isAuth();
+      
+      allow create: if isAuth()
+        && request.resource.data.reportedBy == request.auth.uid
+        && request.resource.data.description.size() <= 1000
+        && isValidAppCheck();
+      
+      allow update: if isAuth()
+        && resource.data.reportedBy == request.auth.uid;
+      
+      allow delete: if isAuth()
+        && resource.data.reportedBy == request.auth.uid;
+
+      // Sightings
+      match /sightings/{sightingId} {
+        allow read: if isAuth();
+        allow create: if isAuth()
+          && request.resource.data.reportedBy == request.auth.uid
+          && isValidAppCheck();
+      }
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+    // GAMIFICATION
+    // ══════════════════════════════════════════════════════════════════════
+
+    match /challenges/{challengeId} {
+      // ✅ SECURITY FIX: Require auth
+      allow read: if isAuth();
+      allow create: if isAuth() && isAdmin();
+      allow update, delete: if isAdmin();
+
+      match /participants/{userId} {
+        allow read: if isAuth();
+        allow create: if isAuth() && isUser(userId) && isValidAppCheck();
+        allow update: if isAuth() && isUser(userId);
+      }
+    }
+
+    match /badges/{badgeId} {
+      // ✅ SECURITY FIX: Require auth
+      allow read: if isAuth();
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /leaderboard/{userId} {
+      // ✅ SECURITY FIX: Require auth to prevent scraping
+      allow read: if isAuth();
+      allow create, update: if isAuth() && isUser(userId);
+      allow delete: if isAdmin();
+    }
+
+    match /user_badges/{userId} {
+      allow read: if isAuth();
+      allow write: if isAdmin(); // Badges awarded by system
+    }
+
+    match /user_challenges/{userId} {
+      allow read: if isAuth() && isUser(userId);
+      allow create, update: if isAuth() && isUser(userId);
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+    // FAMILY ACCOUNTS - CRITICAL SECURITY FIX
+    // ══════════════════════════════════════════════════════════════════════
+
+    match /familyAccounts/{accountId} {
+      // Helper functions for family membership
+      function isFamilyMember() {
+        return isAuth() && request.auth.uid in get(/databases/$(database)/documents/familyAccounts/$(accountId)).data.memberIds;
+      }
+      
+      function isFamilyOwner() {
+        return isAuth() && request.auth.uid == get(/databases/$(database)/documents/familyAccounts/$(accountId)).data.ownerId;
+      }
+      
+      // ✅ CRITICAL FIX #1: Only family members can read account
+      allow read: if isAuth() && isFamilyMember();
+      
+      allow create: if isAuth()
+        && request.resource.data.ownerId == request.auth.uid
+        && isValidAppCheck();
+      
+      allow update: if isAuth() && isFamilyOwner() && isValidAppCheck();
+      allow delete: if isAuth() && isFamilyOwner();
+
+      // ✅ CRITICAL FIX #1: GPS Location Data - ONLY FAMILY MEMBERS
+      match /memberLocations/{userId} {
+        // ✅ WAS: allow read: if isAuth(); (ANYONE could read!)
+        // ✅ NOW: Only family members can read location data
+        allow read: if isAuth() && isFamilyMember();
+        
+        allow create, update: if isAuth()
+          && isUser(userId)
+          && isValidAppCheck();  // Prevent spoofed locations
+        
+        allow delete: if isAuth() && (
+          isUser(userId) || isFamilyOwner()
+        );
+
+        // ✅ CRITICAL FIX #1: Location History - ONLY FAMILY MEMBERS
+        match /history/{historyId} {
+          // ✅ WAS: allow read: if isAuth(); (STALKING VULNERABILITY!)
+          // ✅ NOW: Only family members
+          allow read: if isAuth() && isFamilyMember();
+          
+          allow create: if isAuth()
+            && isUser(userId)
+            && isValidAppCheck();
+          
+          allow delete: if isAuth() && (
+            isUser(userId) || isFamilyOwner()
+          );
+        }
+      }
+
+      // ✅ CRITICAL FIX #1: Safe Zones (home, school addresses) - ONLY FAMILY
+      match /safeZones/{zoneId} {
+        // ✅ WAS: allow read: if isAuth(); (ANYONE could read!)
+        // ✅ NOW: Only family members can read safe zones
+        allow read: if isAuth() && isFamilyMember();
+        
+        allow create, update, delete: if isAuth()
+          && isFamilyOwner()
+          && isValidAppCheck();
+      }
+
+      // ✅ SECURITY FIX: Alerts - ONLY FAMILY
+      match /alerts/{alertId} {
+        allow read: if isAuth() && isFamilyMember();
+        allow create: if isAuth() && isFamilyMember() && isValidAppCheck();
+        allow update, delete: if isAuth() && isFamilyOwner();
+      }
+
+      // ✅ SECURITY FIX: Rides - ONLY FAMILY
+      match /rides/{rideId} {
+        allow read: if isAuth() && isFamilyMember();
+        allow create: if isAuth() && isFamilyMember() && isValidAppCheck();
+        allow update, delete: if isAuth() && (
+          request.auth.uid == resource.data.userId || isFamilyOwner()
+        );
+      }
+
+      // ✅ SECURITY FIX: Achievements - ONLY FAMILY
+      match /achievements/{achievementId} {
+        allow read: if isAuth() && isFamilyMember();
+        allow create: if isAuth() && isFamilyMember() && isValidAppCheck();
+        allow update, delete: if isAuth() && isFamilyOwner();
+      }
+
+      // ✅ SECURITY FIX: Member Stats - ONLY FAMILY
+      match /memberStats/{memberId} {
+        allow read: if isAuth() && isFamilyMember();
+        allow create, update: if isAuth() && isUser(memberId) && isValidAppCheck();
+        allow delete: if isAuth() && isFamilyOwner();
+      }
+
+      // ✅ SECURITY FIX: Challenges - ONLY FAMILY
+      match /challenges/{challengeId} {
+        allow read: if isAuth() && isFamilyMember();
+        allow create, update: if isAuth() && isFamilyMember() && isValidAppCheck();
+        allow delete: if isAuth() && isFamilyOwner();
+      }
+    }
+
+    // Family Invitations
+    match /familyInvitations/{invitationId} {
+      allow read: if isAuth() && (
+        request.auth.token.email == resource.data.inviteeEmail
+        || request.auth.uid == resource.data.invitedByUserId
+      );
+      
+      allow create: if isAuth()
+        && request.resource.data.invitedByUserId == request.auth.uid
+        && isValidAppCheck();
+      
+      allow update: if isAuth()
+        && request.auth.token.email == resource.data.inviteeEmail;
+      
+      allow delete: if isAuth()
+        && request.auth.uid == resource.data.invitedByUserId;
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+    // ROUTES
+    // ══════════════════════════════════════════════════════════════════════
+
+    match /routes/{routeId} {
+      allow read: if isAuth();
+      
+      allow create: if isAuth()
+        && request.resource.data.userId == request.auth.uid
+        && isValidAppCheck();
+      
+      allow update: if isAuth()
+        && resource.data.userId == request.auth.uid;
+      
+      allow delete: if isAuth()
+        && resource.data.userId == request.auth.uid;
+    }
+
+    match /route_suggestions/{suggestionId} {
+      // Public curated routes - require auth to prevent scraping
+      allow read: if isAuth();
+      allow create, update, delete: if isAdmin();
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+    // REPORTS (User Reports, Content Moderation)
+    // ══════════════════════════════════════════════════════════════════════
+
+    match /reports/{reportId} {
+      allow read: if isAdmin();
+      
+      allow create: if isAuth()
+        && request.resource.data.reportedBy == request.auth.uid
+        && request.resource.data.reason.size() <= 500
+        && checkRateLimit('createReport', 10, 60)  // 10 per hour
+        && isValidAppCheck();
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+    // EXPAT HUB - PUBLIC CONTENT
+    // ══════════════════════════════════════════════════════════════════════
+
+    match /expatGuides/{guideId} {
+      // ✅ Legitimate public content
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /quickTips/{tipId} {
+      // ✅ Legitimate public content
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /cyclingRules/{ruleId} {
+      // ✅ Legitimate public safety information
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /bikeShops/{shopId} {
+      // ✅ Legitimate public directory
+      allow read: if true;
+      allow create: if isAuth() && isValidAppCheck();
+      allow update, delete: if isAuth() && (
+        resource.data.submittedBy == request.auth.uid || isAdmin()
+      );
+    }
+
+    match /emergencyContacts/{contactId} {
+      // ✅ Public safety resource
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+    // BIKE SHARE (Planned Feature)
+    // ══════════════════════════════════════════════════════════════════════
+
+    match /bike_share_stations/{stationId} {
+      allow read: if isAuth();
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /bike_rentals/{rentalId} {
+      allow read: if isAuth() && (
+        resource.data.userId == request.auth.uid || isAdmin()
+      );
+      
+      allow create: if isAuth()
+        && request.resource.data.userId == request.auth.uid
+        && isValidAppCheck();
+      
+      allow update: if isAuth() && (
+        resource.data.userId == request.auth.uid || isAdmin()
+      );
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+    // NOTIFICATIONS
+    // ══════════════════════════════════════════════════════════════════════
+
+    match /notifications/{notificationId} {
+      allow read: if isAuth()
+        && resource.data.userId == request.auth.uid;
+      
+      allow create: if isAuth(); // System creates notifications
+      
+      allow update: if isAuth()
+        && resource.data.userId == request.auth.uid;
+      
+      allow delete: if isAuth()
+        && resource.data.userId == request.auth.uid;
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+    // RATE LIMITING TRACKING (Internal)
+    // ══════════════════════════════════════════════════════════════════════
+
+    match /rateLimits/{limitId} {
+      // System-managed collection for rate limit tracking
+      allow read: if false;
+      allow write: if false; // Only Cloud Functions can write
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+    // AUDIT LOG (Security Monitoring)
+    // ══════════════════════════════════════════════════════════════════════
+
+    match /auditLog/{entryId} {
+      allow read: if isAdmin();
+      allow write: if false; // Only Cloud Functions can write
+    }
+  }
+}

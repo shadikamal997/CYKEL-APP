@@ -1,0 +1,14 @@
+# Node.js
+node_modules/
+package-lock.json
+
+# Firebase Admin SDK (NEVER commit!)
+*-firebase-adminsdk*.json
+cykel-32383-firebase-adminsdk.json
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store

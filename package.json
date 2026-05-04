@@ -1,0 +1,15 @@
+{
+  "name": "cykel-expat-hub-seeding",
+  "version": "1.0.0",
+  "description": "Seed Expat Hub data to Firestore for CYKEL app",
+  "main": "seed_expat_hub.js",
+  "scripts": {
+    "seed": "node seed_expat_hub.js"
+  },
+  "keywords": ["firebase", "firestore", "seeding", "cykel"],
+  "author": "CYKEL Team",
+  "license": "ISC",
+  "dependencies": {
+    "firebase-admin": "^12.0.0"
+  }
+}
