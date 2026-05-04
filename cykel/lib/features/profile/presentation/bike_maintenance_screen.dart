@@ -315,7 +315,7 @@ class _RecordTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: onTap,
-      leading: AppAvatar(
+      leading: const AppAvatar(
         url: null,
         size: 40,
         fallbackIcon: Icons.build_circle_outlined,

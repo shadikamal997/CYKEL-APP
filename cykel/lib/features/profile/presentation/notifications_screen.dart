@@ -252,9 +252,9 @@ class NotificationsScreen extends ConsumerWidget {
               ],
             )
           else
-            PremiumGate(
+            const PremiumGate(
               featureDescription: 'Schedule automatic ride reminders at your preferred time.',
-              child: const SizedBox.shrink(),
+              child: SizedBox.shrink(),
             ),
         ],
       ),

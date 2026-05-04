@@ -261,7 +261,7 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
                     ),
                     TextButton.icon(
                       onPressed: _goToMap,
-                      icon: Icon(Icons.map_rounded, size: 16, color: _kPrimaryColor),
+                      icon: const Icon(Icons.map_rounded, size: 16, color: _kPrimaryColor),
                       label: Text(l10n.tabMap,
                           style: AppTextStyles.bodySmall
                               .copyWith(fontWeight: FontWeight.w600, color: _kPrimaryColor)),
@@ -324,7 +324,7 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
                         ],
                       ),
                       child: _searching
-                          ? Padding(
+                          ? const Padding(
                               padding: EdgeInsets.all(16),
                               child: Center(
                                   child: SizedBox(
@@ -344,7 +344,7 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
                                       const NeverScrollableScrollPhysics(),
                                   itemCount: _suggestions.length,
                                   separatorBuilder: (context, index) =>
-                                      Divider(height: 1, indent: 48),
+                                      const Divider(height: 1, indent: 48),
                                   itemBuilder: (_, i) {
                                     final p = _suggestions[i];
                                     return ListTile(
@@ -589,7 +589,7 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
                     trailing: _userLocation != null
                         ? GestureDetector(
                             onTap: _loadNearby,
-                            child: Icon(Icons.refresh_rounded,
+                            child: const Icon(Icons.refresh_rounded,
                                 size: 18, color: _kPrimaryColor),
                           )
                         : null,
@@ -687,7 +687,7 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Row(mainAxisSize: MainAxisSize.min, children: [
-                          Icon(Icons.add_rounded,
+                          const Icon(Icons.add_rounded,
                               color: Colors.white, size: 14),
                           const SizedBox(width: 4),
                           Text(l10n.reportHazardTitle,
@@ -758,7 +758,7 @@ class _CategoryCard extends StatelessWidget {
                 Image.asset(
                   image!,
                   fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) => Container(
+                  errorBuilder: (_, _, _) => Container(
                     color: _kPrimaryColor.withValues(alpha: 0.15),
                   ),
                 ),
@@ -893,7 +893,7 @@ class _NearbySection extends StatelessWidget {
             decoration: BoxDecoration(
                 color: context.colors.background,
                 borderRadius: BorderRadius.circular(12)),
-            child: Center(
+            child: const Center(
                 child: SizedBox(
                     width: 20,
                     height: 20,
@@ -934,7 +934,7 @@ class _NearbySection extends StatelessWidget {
                         color: Colors.white.withValues(alpha: 0.2),
                         borderRadius: BorderRadius.circular(6),
                       ),
-                      child: Icon(Icons.location_on_rounded, size: 14, color: Colors.white),
+                      child: const Icon(Icons.location_on_rounded, size: 14, color: Colors.white),
                     ),
                     const SizedBox(height: 6),
                     Expanded(
@@ -979,7 +979,7 @@ class _SavedRouteCard extends StatelessWidget {
           decoration: BoxDecoration(
               color: AppColors.error.withValues(alpha: 0.12),
               borderRadius: BorderRadius.circular(12)),
-          child: Icon(Icons.delete_rounded,
+          child: const Icon(Icons.delete_rounded,
               color: AppColors.error, size: 20),
         ),
         onDismissed: (_) => onDelete(),
@@ -1000,7 +1000,7 @@ class _SavedRouteCard extends StatelessWidget {
                   color: _kPrimaryColor.withValues(alpha: 0.12),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Icon(Icons.bookmark_rounded,
+                child: const Icon(Icons.bookmark_rounded,
                     color: _kPrimaryColor, size: 18),
               ),
               const SizedBox(width: 12),
@@ -1046,7 +1046,7 @@ class _HazardsSection extends ConsumerWidget {
       stream: ref.read(crowdHazardServiceProvider).streamNearby(center),
       builder: (context, snap) {
         if (snap.connectionState == ConnectionState.waiting) {
-          return Center(
+          return const Center(
               child: Padding(
                   padding: EdgeInsets.all(16),
                   child: SizedBox(
@@ -1099,7 +1099,7 @@ class _HazardTile extends StatelessWidget {
             color: Colors.orange.withValues(alpha: 0.12),
             borderRadius: BorderRadius.circular(8),
           ),
-          child: Center(child: Text(emoji, style: TextStyle(fontSize: 16))),
+          child: Center(child: Text(emoji, style: const TextStyle(fontSize: 16))),
         ),
         const SizedBox(width: 12),
         Expanded(
@@ -1310,7 +1310,7 @@ class _CykelNearbyProviders extends ConsumerWidget {
                     ),
                     const SizedBox(width: 4),
                     if (p.isVerified)
-                      Icon(Icons.verified_rounded,
+                      const Icon(Icons.verified_rounded,
                           size: 10, color: Colors.white),
                   ]),
                   const SizedBox(height: 4),

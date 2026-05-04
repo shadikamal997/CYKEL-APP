@@ -338,7 +338,7 @@ class _EventDetailScreenState extends ConsumerState<EventDetailScreen> {
           // Title
           Text(
             event.title,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 26,
               fontWeight: FontWeight.w800,
               color: _kPrimaryText,
@@ -363,7 +363,7 @@ class _EventDetailScreenState extends ConsumerState<EventDetailScreen> {
       ),
       child: Text(
         text,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 13,
           fontWeight: FontWeight.w600,
           color: _kSecondaryText,
@@ -436,7 +436,7 @@ class _EventDetailScreenState extends ConsumerState<EventDetailScreen> {
               const SizedBox(width: 12),
               Text(
                 '${event.currentParticipants} ${context.l10n.peopleJoined}',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
                   color: _kSecondaryText,
@@ -566,7 +566,7 @@ class _EventDetailScreenState extends ConsumerState<EventDetailScreen> {
                 children: [
                   Text(
                     label,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
                       color: _kSecondaryText,
@@ -575,7 +575,7 @@ class _EventDetailScreenState extends ConsumerState<EventDetailScreen> {
                   const SizedBox(height: 2),
                   Text(
                     value,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
                       color: _kPrimaryText,
@@ -585,7 +585,7 @@ class _EventDetailScreenState extends ConsumerState<EventDetailScreen> {
                     const SizedBox(height: 2),
                     Text(
                       subtitle,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 13,
                         color: _kSecondaryText,
                       ),
@@ -595,7 +595,7 @@ class _EventDetailScreenState extends ConsumerState<EventDetailScreen> {
               ),
             ),
             if (showArrow)
-              Icon(
+              const Icon(
                 Icons.chevron_right,
                 color: _kSoftElements,
               ),
@@ -625,7 +625,7 @@ class _EventDetailScreenState extends ConsumerState<EventDetailScreen> {
         children: [
           Text(
             context.l10n.eventDescription,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
               color: _kSecondaryText,
@@ -634,7 +634,7 @@ class _EventDetailScreenState extends ConsumerState<EventDetailScreen> {
           const SizedBox(height: 8),
           Text(
             event.description!,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 15,
               color: _kPrimaryText,
               height: 1.5,
@@ -696,7 +696,7 @@ class _EventDetailScreenState extends ConsumerState<EventDetailScreen> {
               children: [
                 Text(
                   context.l10n.eventOrganizer,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
                     color: _kSecondaryText,
@@ -705,7 +705,7 @@ class _EventDetailScreenState extends ConsumerState<EventDetailScreen> {
                 const SizedBox(height: 2),
                 Text(
                   event.organizerName,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                     color: _kPrimaryText,
@@ -934,8 +934,8 @@ class _EventDetailScreenState extends ConsumerState<EventDetailScreen> {
       if (mounted) {
         if (success) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: const Text('Event added to calendar'),
+            const SnackBar(
+              content: Text('Event added to calendar'),
               backgroundColor: Colors.green,
               behavior: SnackBarBehavior.floating,
             ),

@@ -48,7 +48,7 @@ class LocationDetailScreen extends StatelessWidget {
               ),
               title: Text(
                 place.name,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16,
                   fontWeight: FontWeight.w600,

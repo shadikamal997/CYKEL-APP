@@ -553,7 +553,7 @@ class _ProviderOnboardingScreenState
                             borderRadius: BorderRadius.circular(14)),
                       ),
                       child: _submitting
-                          ? SizedBox(
+                          ? const SizedBox(
                               width: 20,
                               height: 20,
                               child: CircularProgressIndicator(

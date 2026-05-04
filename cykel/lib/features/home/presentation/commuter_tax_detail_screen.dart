@@ -49,7 +49,7 @@ class CommuterTaxDetailScreen extends ConsumerWidget {
       ),
       body: deductionAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (_, __) => Center(child: Text(l10n.failedToLoad)),
+        error: (_, _) => Center(child: Text(l10n.failedToLoad)),
         data: (summary) => _buildContent(context, summary),
       ),
     );
@@ -92,13 +92,13 @@ class CommuterTaxDetailScreen extends ConsumerWidget {
                 value: '${summary.totalCommuteDays}',
                 icon: Icons.calendar_today,
               ),
-              Divider(height: 24),
+              const Divider(height: 24),
               _StatRow(
                 label: l10n.commuteKm,
                 value: '${summary.totalCommuteKm.toStringAsFixed(0)} km',
                 icon: Icons.directions_bike,
               ),
-              Divider(height: 24),
+              const Divider(height: 24),
               _StatRow(
                 label: l10n.deductibleKm,
                 value: '${summary.deductibleKm.toStringAsFixed(0)} km',

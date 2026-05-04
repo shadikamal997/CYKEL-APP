@@ -440,14 +440,6 @@ double _bearingBetween(LatLng from, LatLng to) {
   return (math.atan2(y, x) * 180 / math.pi + 360) % 360;
 }
 
-String _profileLabel(BuildContext context, BikeProfile p) => switch (p) {
-  BikeProfile.city   => context.l10n.bikeProfileCity,
-  BikeProfile.eBike  => context.l10n.bikeProfileEbike,
-  BikeProfile.road   => context.l10n.bikeProfileRoad,
-  BikeProfile.cargo  => context.l10n.bikeProfileCargo,
-  BikeProfile.family => context.l10n.bikeProfileFamily,
-};
-
 Color _windColor(WindCondition c) => switch (c) {
   WindCondition.headwind => const Color(0xFFE53935),
   WindCondition.crosswind => const Color(0xFFF57C00),
@@ -5094,42 +5086,6 @@ class _RouteSummaryCard extends ConsumerWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class _StatChip extends StatelessWidget {
-  const _StatChip({
-    required this.icon,
-    required this.label,
-    required this.color,
-  });
-  final IconData icon;
-  final String label;
-  final Color color;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-      decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(icon, color: color, size: 18),
-          const SizedBox(width: 6),
-          Text(
-            label,
-            style: AppTextStyles.bodyMedium.copyWith(
-              color: color,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ],
       ),
     );
   }

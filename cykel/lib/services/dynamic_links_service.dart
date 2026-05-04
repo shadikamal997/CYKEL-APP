@@ -112,8 +112,8 @@ class DynamicLinksService {
     );
 
     if (link != null) {
-      await Share.share(
-        'Check out this bike route: $routeName\n$link',
+      await SharePlus.instance.share(
+        ShareParams(text: 'Check out this bike route: $routeName\n$link'),
       );
     }
   }
@@ -134,8 +134,8 @@ class DynamicLinksService {
     );
 
     if (link != null) {
-      await Share.share(
-        'Join me for this cycling event: $eventName\n$link',
+      await SharePlus.instance.share(
+        ShareParams(text: 'Join me for this cycling event: $eventName\n$link'),
       );
     }
   }
@@ -156,8 +156,8 @@ class DynamicLinksService {
     );
 
     if (link != null) {
-      await Share.share(
-        'Check out this bike shop: $providerName\n$link',
+      await SharePlus.instance.share(
+        ShareParams(text: 'Check out this bike shop: $providerName\n$link'),
       );
     }
   }
@@ -178,8 +178,8 @@ class DynamicLinksService {
     );
 
     if (link != null) {
-      await Share.share(
-        'Check out this bike for sale: $title\nDKK ${price.toInt()}\n$link',
+      await SharePlus.instance.share(
+        ShareParams(text: 'Check out this bike for sale: $title\nDKK ${price.toInt()}\n$link'),
       );
     }
   }
@@ -198,8 +198,8 @@ class DynamicLinksService {
     );
 
     if (link != null) {
-      await Share.share(
-        'Bike share station: $stationName\n$availableBikes bikes available\n$link',
+      await SharePlus.instance.share(
+        ShareParams(text: 'Bike share station: $stationName\n$availableBikes bikes available\n$link'),
       );
     }
   }
@@ -217,8 +217,8 @@ class DynamicLinksService {
     );
 
     if (link != null) {
-      await Share.share(
-        'Join me on CYKEL - the Copenhagen cycling app!\n$link',
+      await SharePlus.instance.share(
+        ShareParams(text: 'Join me on CYKEL - the Copenhagen cycling app!\n$link'),
       );
     }
   }

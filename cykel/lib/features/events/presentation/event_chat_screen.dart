@@ -292,7 +292,7 @@ class _EventChatScreenState extends ConsumerState<EventChatScreen> {
                 shape: BoxShape.circle,
               ),
               child: IconButton(
-                icon: Icon(
+                icon: const Icon(
                   Icons.send,
                   color: Colors.white,
                 ),

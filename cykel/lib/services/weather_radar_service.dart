@@ -126,8 +126,8 @@ class WeatherRadarService {
         circleId: CircleId('rain_${data.location.latitude}_${data.location.longitude}'),
         center: data.location,
         radius: radius,
-        fillColor: color.withOpacity(0.4),
-        strokeColor: color.withOpacity(0.6),
+        fillColor: color.withValues(alpha: 0.4),
+        strokeColor: color.withValues(alpha: 0.6),
         strokeWidth: 1,
       );
     }).toSet();

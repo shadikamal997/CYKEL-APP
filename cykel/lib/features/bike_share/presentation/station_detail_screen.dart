@@ -35,7 +35,7 @@ class StationDetailScreen extends ConsumerWidget {
       builder: (context, scrollController) => Container(
         decoration: BoxDecoration(
           color: context.colors.background,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
         ),
         child: ListView(
           controller: scrollController,

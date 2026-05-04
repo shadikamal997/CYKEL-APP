@@ -461,7 +461,7 @@ class _EditLocationScreenState extends ConsumerState<EditLocationScreen> {
                   borderRadius: BorderRadius.circular(14)),
             ),
             child: _saving
-                ? SizedBox(
+                ? const SizedBox(
                     width: 20,
                     height: 20,
                     child: CircularProgressIndicator(

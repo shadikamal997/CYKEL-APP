@@ -94,7 +94,7 @@ class _EventsScreenState extends ConsumerState<EventsScreen> {
                       const SizedBox(width: 8),
                       Text(
                         context.l10n.eventsTrendingNow,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w700,
                           color: _kPrimaryText,
@@ -107,7 +107,7 @@ class _EventsScreenState extends ConsumerState<EventsScreen> {
                     onTap: () {},
                     child: Text(
                       l10n.viewAll,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                         color: _kPrimaryColor,
@@ -131,12 +131,12 @@ class _EventsScreenState extends ConsumerState<EventsScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
+                  const Row(
                     children: [
                       Icon(Icons.fiber_new_rounded, 
                         size: 24, 
                         color: _kPrimaryColor),
-                      const SizedBox(width: 8),
+                      SizedBox(width: 8),
                       Text(
                         'New Rides',
                         style: TextStyle(
@@ -152,7 +152,7 @@ class _EventsScreenState extends ConsumerState<EventsScreen> {
                     onTap: () {},
                     child: Text(
                       l10n.viewAll,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                         color: _kPrimaryColor,
@@ -182,7 +182,7 @@ class _EventsScreenState extends ConsumerState<EventsScreen> {
                         size: 24, 
                         color: Colors.blue.shade600),
                       const SizedBox(width: 8),
-                      Text(
+                      const Text(
                         'Nearby Events',
                         style: TextStyle(
                           fontSize: 20,
@@ -197,7 +197,7 @@ class _EventsScreenState extends ConsumerState<EventsScreen> {
                     onTap: () {},
                     child: Text(
                       l10n.viewAll,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                         color: _kPrimaryColor,
@@ -227,7 +227,7 @@ class _EventsScreenState extends ConsumerState<EventsScreen> {
                         size: 24, 
                         color: Colors.purple.shade600),
                       const SizedBox(width: 8),
-                      Text(
+                      const Text(
                         'This Weekend',
                         style: TextStyle(
                           fontSize: 20,
@@ -242,7 +242,7 @@ class _EventsScreenState extends ConsumerState<EventsScreen> {
                     onTap: () {},
                     child: Text(
                       l10n.viewAll,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                         color: _kPrimaryColor,
@@ -268,7 +268,7 @@ class _EventsScreenState extends ConsumerState<EventsScreen> {
                 children: [
                   Text(
                     l10n.popularEvents,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w700,
                       color: _kPrimaryText,
@@ -281,7 +281,7 @@ class _EventsScreenState extends ConsumerState<EventsScreen> {
                     },
                     child: Text(
                       l10n.viewAll,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                         color: _kPrimaryColor,
@@ -307,7 +307,7 @@ class _EventsScreenState extends ConsumerState<EventsScreen> {
                 children: [
                   Text(
                     l10n.upcomingEvents,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w700,
                       color: _kPrimaryText,
@@ -341,8 +341,8 @@ class _EventsScreenState extends ConsumerState<EventsScreen> {
         right: 20,
         bottom: 24,
       ),
-      decoration: BoxDecoration(
-        image: const DecorationImage(
+      decoration: const BoxDecoration(
+        image: DecorationImage(
           image: AssetImage('assets/images/eventhero.webp'),
           fit: BoxFit.cover,
         ),
@@ -662,7 +662,7 @@ class _EventsScreenState extends ConsumerState<EventsScreen> {
                 label,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w600,
                   color: _kPrimaryText,
@@ -799,7 +799,7 @@ class _EventsScreenState extends ConsumerState<EventsScreen> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                Text(
+                const Text(
                   'Maximum Distance',
                   style: TextStyle(
                     fontSize: 18,
@@ -873,8 +873,8 @@ class _EventsScreenState extends ConsumerState<EventsScreen> {
                 ),
               ),
               const SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
                   'Age Group Filter',
                   style: TextStyle(
@@ -991,8 +991,8 @@ class _EventsScreenState extends ConsumerState<EventsScreen> {
                 ),
               ),
               const SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
                   'Language Filter',
                   style: TextStyle(
@@ -1088,8 +1088,8 @@ class _EventsScreenState extends ConsumerState<EventsScreen> {
                 ),
               ),
               const SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
                   'Event Type Filter',
                   style: TextStyle(
@@ -1230,7 +1230,7 @@ class _EventsScreenState extends ConsumerState<EventsScreen> {
         const SizedBox(height: 8),
         Text(
           value,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w800,
             color: _kPrimaryText,
@@ -1239,7 +1239,7 @@ class _EventsScreenState extends ConsumerState<EventsScreen> {
         const SizedBox(height: 2),
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 11,
             fontWeight: FontWeight.w500,
             color: _kSecondaryText,
@@ -1821,7 +1821,7 @@ class _PremiumEventCard extends ConsumerWidget {
                     // Title
                     Text(
                       event.title,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w700,
                         color: _kPrimaryText,
@@ -1836,7 +1836,7 @@ class _PremiumEventCard extends ConsumerWidget {
                     Row(
                       children: [
                         // Date
-                        Icon(
+                        const Icon(
                           Icons.calendar_today_outlined,
                           size: 12,
                           color: _kSecondaryText,
@@ -1844,7 +1844,7 @@ class _PremiumEventCard extends ConsumerWidget {
                         const SizedBox(width: 3),
                         Text(
                           event.formattedDate,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 11,
                             color: _kSecondaryText,
                           ),
@@ -1852,7 +1852,7 @@ class _PremiumEventCard extends ConsumerWidget {
                         const SizedBox(width: 10),
 
                         // Location
-                        Icon(
+                        const Icon(
                           Icons.location_on_outlined,
                           size: 12,
                           color: _kSecondaryText,
@@ -1861,7 +1861,7 @@ class _PremiumEventCard extends ConsumerWidget {
                         Expanded(
                           child: Text(
                             event.meetingPoint.name ?? event.meetingPoint.address,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 11,
                               color: _kSecondaryText,
                             ),
@@ -1902,7 +1902,7 @@ class _PremiumEventCard extends ConsumerWidget {
                         const SizedBox(width: 6),
                         Text(
                           '${event.currentParticipants} ${l10n.participants}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 11,
                             fontWeight: FontWeight.w500,
                             color: _kSecondaryText,
@@ -2046,7 +2046,7 @@ class _CompactEventCard extends StatelessWidget {
                 children: [
                   Text(
                     event.title,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
                       color: _kPrimaryText,
@@ -2057,7 +2057,7 @@ class _CompactEventCard extends StatelessWidget {
                   const SizedBox(height: 6),
                   Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.calendar_today_outlined,
                         size: 12,
                         color: _kSecondaryText,
@@ -2065,7 +2065,7 @@ class _CompactEventCard extends StatelessWidget {
                       const SizedBox(width: 4),
                       Text(
                         '${event.formattedDate} • ${event.formattedTime}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 12,
                           color: _kSecondaryText,
                         ),
@@ -2075,7 +2075,7 @@ class _CompactEventCard extends StatelessWidget {
                   const SizedBox(height: 4),
                   Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.people_outline,
                         size: 12,
                         color: _kSecondaryText,
@@ -2083,7 +2083,7 @@ class _CompactEventCard extends StatelessWidget {
                       const SizedBox(width: 4),
                       Text(
                         event.participantText,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 12,
                           color: _kSecondaryText,
                         ),
@@ -2117,7 +2117,7 @@ class _CompactEventCard extends StatelessWidget {
             ),
 
             // Arrow
-            Icon(
+            const Icon(
               Icons.chevron_right,
               color: _kSoftElements,
             ),
@@ -2151,7 +2151,7 @@ class _EmptyState extends StatelessWidget {
             Container(
               width: 80,
               height: 80,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: _kCardBackground,
                 shape: BoxShape.circle,
               ),
@@ -2164,7 +2164,7 @@ class _EmptyState extends StatelessWidget {
             const SizedBox(height: 20),
             Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
                 color: _kPrimaryText,
@@ -2174,7 +2174,7 @@ class _EmptyState extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               subtitle,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 14,
                 color: _kSecondaryText,
               ),

@@ -211,7 +211,7 @@ class _IssueChip extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(icon, style: TextStyle(fontSize: 16)),
+            Text(icon, style: const TextStyle(fontSize: 16)),
             const SizedBox(width: 8),
             Text(
               label,

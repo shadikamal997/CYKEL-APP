@@ -422,8 +422,8 @@ class _NewMessageSheetState extends State<_NewMessageSheet> {
           Container(width: 40, height: 4,
             decoration: BoxDecoration(color: Colors.grey[300], borderRadius: BorderRadius.circular(2))),
           const SizedBox(height: 16),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
             child: Text('New Message', style: AppTextStyles.labelLarge),
           ),
           const SizedBox(height: 12),

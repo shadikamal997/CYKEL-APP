@@ -20,11 +20,11 @@ class RouteHeatPoint {
 
   Color get heatColor {
     // Blue (cold) -> Green -> Yellow -> Red (hot)
-    if (intensity < 0.2) return const Color(0xFF0000FF).withOpacity(0.3);
-    if (intensity < 0.4) return const Color(0xFF00FFFF).withOpacity(0.4);
-    if (intensity < 0.6) return const Color(0xFF00FF00).withOpacity(0.5);
-    if (intensity < 0.8) return const Color(0xFFFFFF00).withOpacity(0.6);
-    return const Color(0xFFFF0000).withOpacity(0.7);
+    if (intensity < 0.2) return const Color(0xFF0000FF).withValues(alpha: 0.3);
+    if (intensity < 0.4) return const Color(0xFF00FFFF).withValues(alpha: 0.4);
+    if (intensity < 0.6) return const Color(0xFF00FF00).withValues(alpha: 0.5);
+    if (intensity < 0.8) return const Color(0xFFFFFF00).withValues(alpha: 0.6);
+    return const Color(0xFFFF0000).withValues(alpha: 0.7);
   }
 }
 

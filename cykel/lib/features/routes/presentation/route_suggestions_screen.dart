@@ -889,7 +889,7 @@ class _SavedRouteCard extends StatelessWidget {
         alignment: Alignment.centerRight,
         padding: const EdgeInsets.only(right: 16),
         color: (Colors.black).withValues(alpha: 0.1),
-        child: Icon(Icons.delete, color: Colors.black),
+        child: const Icon(Icons.delete, color: Colors.black),
       ),
       onDismissed: (_) => onDelete(),
       child: Container(
@@ -908,7 +908,7 @@ class _SavedRouteCard extends StatelessWidget {
               color: (Colors.black).withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Center(
+            child: const Center(
               child: Icon(Icons.bookmark, color: Colors.black),
             ),
           ),

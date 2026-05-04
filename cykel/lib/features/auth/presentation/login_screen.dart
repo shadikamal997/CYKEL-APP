@@ -6,8 +6,6 @@ import 'package:go_router/go_router.dart';
 
 import '../providers/auth_providers.dart';
 import '../data/auth_repository.dart';
-import '../../../core/l10n/l10n.dart';
-import '../../../core/utils/validators.dart';
 import '../../../core/router/app_router.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
@@ -43,7 +41,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   Widget build(BuildContext context) {
     final authState = ref.watch(authNotifierProvider);
     final isLoading = authState.isLoading;
-    final l10n = context.l10n;
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
@@ -62,12 +59,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     });
 
     return Scaffold(
-      backgroundColor: colorScheme.background,
+      backgroundColor: colorScheme.surface,
       appBar: AppBar(
-        backgroundColor: colorScheme.background,
+        backgroundColor: colorScheme.surface,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: colorScheme.onBackground),
+          icon: Icon(Icons.arrow_back, color: colorScheme.onSurface),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
@@ -108,7 +105,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: colorScheme.shadow.withOpacity(0.05),
+                        color: colorScheme.shadow.withValues(alpha: 0.05),
                         blurRadius: 8,
                         offset: const Offset(0, 2),
                       ),
@@ -145,7 +142,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: colorScheme.shadow.withOpacity(0.05),
+                        color: colorScheme.shadow.withValues(alpha: 0.05),
                         blurRadius: 8,
                         offset: const Offset(0, 2),
                       ),
