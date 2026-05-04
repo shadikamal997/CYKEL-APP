@@ -1,0 +1,119 @@
+Running Gradle task 'assembleRelease'...                        
+Font asset "CupertinoIcons.ttf" was tree-shaken, reducing it from 257628 to 848 bytes (99.7% reduction). Tree-shaking can be disabled by providing the --no-tree-shake-icons flag when building your app.
+Font asset "MaterialIcons-Regular.otf" was tree-shaken, reducing it from 1645184 to 62044 bytes (96.2% reduction). Tree-shaking can be disabled by providing the --no-tree-shake-icons flag when building your app.
+Running Gradle task 'assembleRelease'...                          164.1s
+✓ Built build/app/outputs/flutter-apk/app-release.apk (147.8MB)
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+app-release.apk (total compressed)                                        141 MB
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  META-INF/
+    androidx                                                                3 KB
+  assets/
+    dexopt                                                                  3 KB
+    flutter_assets                                                        109 MB
+  classes.dex                                                               3 MB
+  classes2.dex                                                             91 KB
+  classes3.dex                                                              3 MB
+  classes4.dex                                                            675 KB
+  lib/
+    arm64-v8a                                                              24 MB
+    Dart AOT symbols accounted decompressed size                           13 MB
+      package:flutter                                                       4 MB
+      package:cykel                                                         3 MB
+      dart:mixin_deduplication                                            435 KB
+      package:flutter_localizations                                       397 KB
+      dart:core                                                           321 KB
+      dart:ui                                                             241 KB
+      dart:typed_data                                                     225 KB
+      dart:async                                                          145 KB
+      dart:io                                                             131 KB
+      package:google_maps_flutter_android                                 117 KB
+      package:intl                                                        110 KB
+      package:markdown                                                    105 KB
+      dart:collection                                                      95 KB
+      dart:convert                                                         92 KB
+      package:riverpod                                                     90 KB
+      package:cloud_firestore_platform_interface                           86 KB
+      package:in_app_purchase_android                                      81 KB
+      package:go_router                                                    81 KB
+      package:material_color_utilities                                     77 KB
+      package:google_maps_flutter_platform_interface                       65 KB
+    armeabi-v7a                                                             4 KB
+    x86_64                                                                  6 KB
+  client_analytics.proto                                                    1 KB
+  firebase/
+    perf                                                                    5 KB
+  google/
+    api                                                                    49 KB
+    apphosting                                                              2 KB
+    cloud                                                                   2 KB
+    firebase                                                                6 KB
+    firestore                                                              23 KB
+    geo                                                                     1 KB
+    logging                                                                 3 KB
+    longrunning                                                             3 KB
+    protobuf                                                               32 KB
+    rpc                                                                    11 KB
+    type                                                                   14 KB
+  kotlin/
+    collections                                                             2 KB
+    concurrent                                                              1 KB
+    kotlin.kotlin_builtins                                                  5 KB
+    ranges                                                                  1 KB
+    reflect                                                                 1 KB
+  messaging_event.proto                                                     1 KB
+  okhttp3/
+    internal                                                               33 KB
+  AndroidManifest.xml                                                       7 KB
+  res/
+    -r.png                                                                 32 KB
+    1I.9.png                                                                2 KB
+    1J.9.png                                                                2 KB
+    5J.9.png                                                                1 KB
+    6C.9.png                                                                1 KB
+    A2.xml                                                                  1 KB
+    BM.png                                                                144 KB
+    CH.png                                                                242 KB
+    FO.png                                                                 15 KB
+    Fw.png                                                                  1 KB
+    G2.9.png                                                                1 KB
+    I3.9.png                                                                1 KB
+    IX.9.png                                                                2 KB
+    Li.9.png                                                                2 KB
+    M9.png                                                                  4 KB
+    MF.9.png                                                                3 KB
+    NA.9.png                                                                2 KB
+    Oi.xml                                                                  1 KB
+    PL.png                                                                  1 KB
+    Pw.9.png                                                                1 KB
+    ZL.9.png                                                                1 KB
+    _p.png                                                                  1 KB
+    bB.png                                                                 19 KB
+    bx.png                                                                  2 KB
+    color-v23                                                               2 KB
+    color                                                                   2 KB
+    dO.xml                                                                  1 KB
+    fY.xml                                                                  1 KB
+    gE.png                                                                  1 KB
+    h7.9.png                                                                1 KB
+    iA.png                                                                 10 KB
+    io.9.png                                                                1 KB
+    nf.png                                                                  1 KB
+    o-.png                                                                  1 KB
+    qD.9.png                                                                3 KB
+    rj.9.png                                                                1 KB
+    t1.xml                                                                  1 KB
+    tP.png                                                                 55 KB
+    tP1.png                                                                68 KB
+    us.9.png                                                                2 KB
+    w2.9.png                                                                1 KB
+    x7.png                                                                  2 KB
+    yi.png                                                                 40 KB
+    zV.9.png                                                                2 KB
+    zw.9.png                                                                1 KB
+  resources.arsc                                                          556 KB
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+A summary of your APK analysis can be found at: /Users/shadi/.flutter-devtools/apk-code-size-analysis_02.json
+
+To analyze your app size in Dart DevTools, run the following command:
+dart devtools --appSizeBase=/Users/shadi/.flutter-devtools/apk-code-size-analysis_02.json
